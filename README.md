@@ -16,3 +16,4 @@ js常见算法题汇总
   - [ ] catch的实现
 - [x] ajax
 - [x] curry
+- [x] new
