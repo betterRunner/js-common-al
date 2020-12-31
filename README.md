@@ -15,3 +15,4 @@ js常见算法题汇总
   - [ ] then输入promise的处理
   - [ ] catch的实现
 - [x] ajax
+- [x] curry
