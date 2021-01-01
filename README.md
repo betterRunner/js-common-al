@@ -26,3 +26,4 @@ js常见算法题汇总
   - [x] off
   - [x] emit
   - [x] once
+- [x] fetchWithLimit
