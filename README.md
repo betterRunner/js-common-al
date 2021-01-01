@@ -18,3 +18,8 @@ js常见算法题汇总
 - [x] new
 - [x] call, apply, bind
 - [x] copy, deepcopy
+- [x] emitter
+  - [x] on
+  - [x] off
+  - [x] emit
+  - [x] once
