@@ -47,7 +47,7 @@ function divide(arr, s, e) {
 }
 function fn2(arr, s = 0, e) {
   e = e === undefined ? arr.length : e
-  if (s >= e || arr.length <= 1) return
+  if (s >= e || arr.length <= 1) return arr
   
   p = divide(arr, s, e) // 最后一个作为基准，小的放前面，大的放后面，在把基准点放到对应中间位置
   fn2(arr, s, p) // 小的部分递归
@@ -56,8 +56,28 @@ function fn2(arr, s = 0, e) {
 }
 
 const test = [12, 3, 1, 17, 8, 20, 0, 2]
-const res = fn(test)
-console.log(res)
+const ret = fn(test)
+console.log(ret)
 
-const res2 = fn2(test)
-console.log(res2)
+const ret2 = fn2(test)
+console.log(ret2)
+
+// 扩展：找到第K大的数
+// https://leetcode-cn.com/problems/kth-largest-element-in-an-array/solution/shu-zu-zhong-de-di-kge-zui-da-yuan-su-by-leetcode-/
+// 思路：在快速排序过程中，当基准点到了第k位置的时候就可以停止递归了
+// 因此我们可以改进快速排序算法来解决这个问题：在分解的过程当中，我们会对子数组进行划分，如果划分得到的 qq 正好就是我们需要的下标，就直接返回 a[q]a[q]；否则，如果 qq 比目标下标小，就递归右子区间，否则递归左子区间。这样就可以把原来递归两个区间变成只递归一个区间，提高了时间效率。这就是「快速选择」算法。
+
+// 为什么第k大的数和快排算法有关？因为快排算法核心是以某个数为分割点，左边比它小，右边比它大，所以第k个分割点就是第k大的数
+function findKVal(arr, s = 0, e, kIndex) {
+  e = e === undefined ? arr.length : e
+
+  const p = divide(arr, s, e)
+  if (p === kIndex) {
+    return arr[kIndex]
+  } else {
+    return p > kIndex ? findKVal(arr, s, p - 1, kIndex) : findKVal(arr, p + 1, e, kIndex)
+  }
+}
+const k = 3
+const ret3 = findKVal(test, 0, test.length, test.length - 3)
+console.log(ret3)
