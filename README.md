@@ -17,3 +17,4 @@ js常见算法题汇总
 - [x] curry
 - [x] new
 - [x] call, apply, bind
+- [x] copy, deepcopy
