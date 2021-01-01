@@ -17,3 +17,4 @@ js常见算法题汇总
 - [x] ajax
 - [x] curry
 - [x] new
+- [x] call, apply, bind
