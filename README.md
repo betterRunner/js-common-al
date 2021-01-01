@@ -8,12 +8,11 @@ js常见算法题汇总
   - [x] 后序非递归
 
 ### hand-write
-- [ ] 手写promise
+- [x] 手写promise
   - [x] resolve, reject正常回调
   - [x] then的实现
   - [x] then返回一个promise
-  - [ ] then输入promise的处理
-  - [ ] catch的实现
+  - [x] catch的实现
 - [x] ajax
 - [x] curry
 - [x] new
