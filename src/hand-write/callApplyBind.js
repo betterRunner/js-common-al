@@ -28,7 +28,7 @@ Function.prototype.mybind = function (context) {
   let _this = this
   const args = [...arguments].slice(1)
   return function F() {
-    if (this instanceof F) {
+    if (this instanceof F) { // 支持柯里化
       return new _this(...args, ...arguments)
     } else {
       return _this.apply(context, args.concat(...arguments))
