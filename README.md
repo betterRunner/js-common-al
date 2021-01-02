@@ -33,3 +33,4 @@ http://mydearest.cn/2020/%E7%AE%97%E6%B3%95%E9%A2%98%E7%BB%83%E4%B9%A0.html
   - [x] emit
   - [x] once
 - [x] fetchWithLimit
+- [x] debouce, throttle
