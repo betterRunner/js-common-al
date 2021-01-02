@@ -31,9 +31,9 @@ function swap(arr, m, n) {
   arr[n] = tmp
 }
 function divide(arr, s, e) {
-  const pivot = arr[e-1] // 以最后一个节点为基准
+  const pivot = arr[e] // 以最后一个节点为基准
   let p = s - 1 // 以起点-1作为p的坐标
-  for (let m=s; m<e-1; m++) {
+  for (let m=s; m<e; m++) {
     const item = arr[m]
     // 找到比基准点小的s，以p+1为分割线，把p+1原有位置（大的）和s互换位置
     // 这样遍历完就相当于以p+1为分割线把小的放在左边，大的放在右边（很巧妙）
@@ -42,15 +42,15 @@ function divide(arr, s, e) {
       swap(arr, p, m)
     }
   }
-  swap(arr, p + 1, e - 1) // 把基准点放到对应中间位置
+  swap(arr, p + 1, e) // 把基准点放到对应中间位置
   return p + 1
 }
 function fn2(arr, s = 0, e) {
-  e = e === undefined ? arr.length : e
-  if (s >= e || arr.length <= 1) return arr
+  e = e === undefined ? arr.length - 1 : e
+  if (s > e) return arr
   
   p = divide(arr, s, e) // 最后一个作为基准，小的放前面，大的放后面，在把基准点放到对应中间位置
-  fn2(arr, s, p) // 小的部分递归
+  fn2(arr, s, p - 1) // 小的部分递归
   fn2(arr, p + 1, e) // 大的部分递归
   return arr
 }
@@ -68,16 +68,16 @@ console.log(ret2)
 // 因此我们可以改进快速排序算法来解决这个问题：在分解的过程当中，我们会对子数组进行划分，如果划分得到的 qq 正好就是我们需要的下标，就直接返回 a[q]a[q]；否则，如果 qq 比目标下标小，就递归右子区间，否则递归左子区间。这样就可以把原来递归两个区间变成只递归一个区间，提高了时间效率。这就是「快速选择」算法。
 
 // 为什么第k大的数和快排算法有关？因为快排算法核心是以某个数为分割点，左边比它小，右边比它大，所以第k个分割点就是第k大的数
-function findKVal(arr, s = 0, e, kIndex) {
-  e = e === undefined ? arr.length : e
-
-  const p = divide(arr, s, e)
-  if (p === kIndex) {
-    return arr[kIndex]
-  } else {
-    return p > kIndex ? findKVal(arr, s, p - 1, kIndex) : findKVal(arr, p + 1, e, kIndex)
+function findKVal(arr, s, e, k) {
+  const p = divide(arr, s, e) // 小的在基准点左边，大的在基准点右边
+  console.log(arr, p, k)
+  if (p === k) { // 基准点就是k
+    return arr[k] // 返回arr[k]就是第k大的数
+  } else { // 根据p和k的大小关系决定是左边递归还是右边递归（这样就不需要两边都递归节省运算）
+    return p > k ? findKVal(arr, s, p - 1, k) : findKVal(arr, p + 1, e, k)
   }
 }
-const k = 3
-const ret3 = findKVal(test, 0, test.length, test.length - 3)
+const k = 1
+const kIndex = test.length - k - 1
+const ret3= findKVal(test, 0, test.length - 1, kIndex)
 console.log(ret3)
